@@ -6,6 +6,10 @@ from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from huggingface_hub import InferenceClient
 from templates import BLOG_TEMPLATE, IMAGE_TEMPLATE
 
+import os
+os.environ["OPENAI_API_BASE"] = "http://chatgpt.multiplewords.com:1337"
+os.environ["OPENAI_API_KEY"]= ""
+
 CLIENT = InferenceClient()
 
 # Initialize Streamlit
@@ -16,7 +20,7 @@ st.title('📝 Article Generator App')
 openai_api_key = st.sidebar.text_input('OpenAI API Key', type='password')
 chat_model = None
 if openai_api_key.startswith('sk-'):
-    chat_model = ChatOpenAI(model_name='gpt-3.5-turbo-16k', openai_api_key=openai_api_key)
+    chat_model = ChatOpenAI(model_name='gpt-4-32k', openai_api_key="ssss")
 else:
     st.warning('Please enter a valid OpenAI API key!', icon='⚠')
 
