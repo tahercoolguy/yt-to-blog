@@ -45,9 +45,9 @@ def generate_blog(yt_url):
                 new_prompt = "describe given text in to 10 main important points with little bit description' "+transcript[0].page_content[completed_length:total_length] +" '"
                 new_data = chat_model.predict(new_prompt)
                 final_transcript = final_transcript + new_data
-                transcript = final_transcript
                 break
-
+    else:
+        final_transcript = transcript[0].page_content
 
     """Create a response schema for structured output."""
     schema = [
@@ -63,7 +63,7 @@ def generate_blog(yt_url):
         template=BLOG_TEMPLATE,
         partial_variables={"format_instructions": format_instructions}
     )
-    prompt_query = prompt.format(transcript=transcript[0].page_content)
+    prompt_query = prompt.format(transcript=final_transcript)
 
     response = chat_model.predict(prompt_query)
     
