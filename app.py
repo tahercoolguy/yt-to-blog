@@ -31,21 +31,28 @@ def generate_blog(yt_url):
     transcript = loader.load()
 
     final_transcript = ""
-    total_length = len(transcript[0].page_content)
+    main_transcript = transcript[0].page_content
+    total_length = len(main_transcript)
     completed_length = 0
-    if total_length > 4000:
+    if total_length > 3000:
         while True:
-            if total_length > 4000 :
-                new_prompt = "describe given text in to 10 main important points with little bit description' "+transcript[0].page_content[completed_length:completed_length+4000] +" '"
+            if total_length > 3000 :
+                new_prompt = "describe given text in to 10 main important points with little bit description' "+main_transcript[completed_length:completed_length+4000] +" '"
                 new_data = chat_model.predict(new_prompt)
                 final_transcript = final_transcript + new_data
-                completed_length = completed_length + 4000
+                completed_length = completed_length + 3000
                 total_length = total_length - completed_length
             else :
-                new_prompt = "describe given text in to 10 main important points with little bit description' "+transcript[0].page_content[completed_length:total_length] +" '"
+                new_prompt = "describe given text in to 10 main important points with little bit description' "+main_transcript[completed_length:total_length] +" '"
                 new_data = chat_model.predict(new_prompt)
                 final_transcript = final_transcript + new_data
-                break
+                if len(final_transcript) > 3000:
+                    main_transcript = final_transcript
+                    total_length = len(main_transcript)
+                    completed_length = 0
+                    final_transcript = ""
+                else:
+                    break
     else:
         final_transcript = transcript[0].page_content
 
