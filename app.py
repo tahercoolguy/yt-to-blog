@@ -20,7 +20,7 @@ st.title('📝 Article Generator App')
 openai_api_key = st.sidebar.text_input('OpenAI API Key', type='password')
 chat_model = None
 if openai_api_key.startswith('sk-'):
-    chat_model = ChatOpenAI(model_name='gpt-3.5-turbo', openai_api_key="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")
+    chat_model = ChatOpenAI(model_name='gpt-3.5-turbo', openai_api_key="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")
 else:
     st.warning('Please enter a valid OpenAI API key!', icon='⚠')
 
