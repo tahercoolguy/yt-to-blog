@@ -7,7 +7,7 @@ from huggingface_hub import InferenceClient
 from templates import BLOG_TEMPLATE, IMAGE_TEMPLATE
 
 import os
-os.environ["OPENAI_API_BASE"] = "http://chatgpt.multiplewords.com:1337"
+os.environ["OPENAI_API_BASE"] = "http://chatgpt.multiplewords.com:1337/v1"
 os.environ["OPENAI_API_KEY"]= ""
 
 CLIENT = InferenceClient()
