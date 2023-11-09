@@ -74,7 +74,7 @@ def generate_blog(yt_url):
     prompt_query = prompt.format(transcript=final_transcript)
 
     response = chat_model.predict(prompt_query)
-    
+    print(response)
     return output_parser.parse(response), transcript[0].metadata["thumbnail_url"]
 
 @st.cache_data ()
