@@ -56,7 +56,7 @@ def generate_blog(yt_url):
     else:
         final_transcript = transcript[0].page_content
 
-    final_transcript = main_transcript
+    # final_transcript = main_transcript
     """Create a response schema for structured output."""
     schema = [
         ResponseSchema(name="title", description="Article title"),
