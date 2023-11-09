@@ -7,8 +7,8 @@ from huggingface_hub import InferenceClient
 from templates import BLOG_TEMPLATE, IMAGE_TEMPLATE
 
 import os
-os.environ["OPENAI_API_BASE"] = "http://chatgpt.multiplewords.com:1337"
-os.environ["OPENAI_API_KEY"]= ""
+# os.environ["OPENAI_API_BASE"] = "http://chatgpt.multiplewords.com:1337"
+# os.environ["OPENAI_API_KEY"]= ""
 
 CLIENT = InferenceClient()
 
@@ -20,7 +20,7 @@ st.title('📝 Article Generator App')
 openai_api_key = st.sidebar.text_input('OpenAI API Key', type='password')
 chat_model = None
 if openai_api_key.startswith('sk-'):
-    chat_model = ChatOpenAI(model_name='gpt-3.5-turbo-16k', openai_api_key="ssss")
+    chat_model = ChatOpenAI(model_name='gpt-3.5-turbo-16k', openai_api_key="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")
 else:
     st.warning('Please enter a valid OpenAI API key!', icon='⚠')
 
@@ -32,31 +32,31 @@ def generate_blog(yt_url):
 
     final_transcript = ""
     main_transcript = transcript[0].page_content
-    total_length = len(main_transcript)
-    completed_length = 0
-    if total_length > 3000:
-        while True:
-            if total_length > 3000 :
-                new_prompt = "describe given text in to 10 main important points with little bit description' "+main_transcript[completed_length:completed_length+3000] +" '"
-                new_data = chat_model.predict(new_prompt)
-                final_transcript = final_transcript + new_data
-                completed_length = completed_length + 3000
-                total_length = total_length - completed_length
-            else :
-                new_prompt = "describe given text in to 10 main important points with little bit description' "+main_transcript[completed_length:total_length] +" '"
-                new_data = chat_model.predict(new_prompt)
-                final_transcript = final_transcript + new_data
-                if len(final_transcript) > 3000:
-                    main_transcript = final_transcript
-                    total_length = len(main_transcript)
-                    completed_length = 0
-                    final_transcript = ""
-                else:
-                    break
-    else:
-        final_transcript = transcript[0].page_content
+    # total_length = len(main_transcript)
+    # completed_length = 0
+    # if total_length > 3000:
+    #     while True:
+    #         if total_length > 3000 :
+    #             new_prompt = "describe given text in to 10 main important points with little bit description' "+main_transcript[completed_length:completed_length+3000] +" '"
+    #             new_data = chat_model.predict(new_prompt)
+    #             final_transcript = final_transcript + new_data
+    #             completed_length = completed_length + 3000
+    #             total_length = total_length - completed_length
+    #         else :
+    #             new_prompt = "describe given text in to 10 main important points with little bit description' "+main_transcript[completed_length:total_length] +" '"
+    #             new_data = chat_model.predict(new_prompt)
+    #             final_transcript = final_transcript + new_data
+    #             if len(final_transcript) > 3000:
+    #                 main_transcript = final_transcript
+    #                 total_length = len(main_transcript)
+    #                 completed_length = 0
+    #                 final_transcript = ""
+    #             else:
+    #                 break
+    # else:
+    #     final_transcript = transcript[0].page_content
 
-    # final_transcript = main_transcript
+    final_transcript = main_transcript
     """Create a response schema for structured output."""
     schema = [
         ResponseSchema(name="title", description="Article title"),
