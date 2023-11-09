@@ -37,7 +37,7 @@ def generate_blog(yt_url):
     if total_length > 3000:
         while True:
             if total_length > 3000 :
-                new_prompt = "describe given text in to 10 main important points with little bit description' "+main_transcript[completed_length:completed_length+4000] +" '"
+                new_prompt = "describe given text in to 10 main important points with little bit description' "+main_transcript[completed_length:completed_length+3000] +" '"
                 new_data = chat_model.predict(new_prompt)
                 final_transcript = final_transcript + new_data
                 completed_length = completed_length + 3000
