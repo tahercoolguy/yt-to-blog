@@ -32,31 +32,31 @@ def generate_blog(yt_url):
 
     final_transcript = ""
     main_transcript = transcript[0].page_content
-    total_length = len(main_transcript)
-    completed_length = 0
-    if total_length > 2000:
-        while True:
-            if total_length > 2000 :
-                new_prompt = "summaries given text in 10 points with very less description ' "+main_transcript[completed_length:completed_length+2000] +" '"
-                new_data = chat_model.predict(new_prompt)
-                final_transcript = final_transcript + new_data
-                completed_length = completed_length + 2000
-                total_length = total_length - completed_length
-            else :
-                new_prompt = "summaries given text in 10 points with very less description ' "+main_transcript[completed_length:total_length] +" '"
-                new_data = chat_model.predict(new_prompt)
-                final_transcript = final_transcript + new_data
-                if len(final_transcript) > 2000:
-                    main_transcript = final_transcript
-                    total_length = len(main_transcript)
-                    completed_length = 0
-                    final_transcript = ""
-                else:
-                    break
-    else:
-        final_transcript = transcript[0].page_content
+    # total_length = len(main_transcript)
+    # completed_length = 0
+    # if total_length > 2000:
+    #     while True:
+    #         if total_length > 2000 :
+    #             new_prompt = "summaries given text in 10 points with very less description ' "+main_transcript[completed_length:completed_length+2000] +" '"
+    #             new_data = chat_model.predict(new_prompt)
+    #             final_transcript = final_transcript + new_data
+    #             completed_length = completed_length + 2000
+    #             total_length = total_length - completed_length
+    #         else :
+    #             new_prompt = "summaries given text in 10 points with very less description ' "+main_transcript[completed_length:total_length] +" '"
+    #             new_data = chat_model.predict(new_prompt)
+    #             final_transcript = final_transcript + new_data
+    #             if len(final_transcript) > 2000:
+    #                 main_transcript = final_transcript
+    #                 total_length = len(main_transcript)
+    #                 completed_length = 0
+    #                 final_transcript = ""
+    #             else:
+    #                 break
+    # else:
+    #     final_transcript = transcript[0].page_content
 
-    # final_transcript = main_transcript
+    final_transcript = main_transcript
     """Create a response schema for structured output."""
     schema = [
         ResponseSchema(name="title", description="Article title"),
